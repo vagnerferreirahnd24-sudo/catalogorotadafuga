@@ -1,0 +1,659 @@
+<title>Catálogo Rota da Fuga</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  --bg: #F4F5F6; --surface: #FFFFFF; --ink: #111418; --muted: #5B6470; --line: #DFE2E6;
+  --accent: #F0961C; --accent-ink: #17110A; --accent-text: #A65200; --focus: #A65200;
+  --head-bg: rgba(255,255,255,.88); --soft: #ECEEF0; --navy: #0B2A66;
+  --hero-a: #FFFFFF; --hero-b: #E9ECEF; --foot-bg: #111418; --foot-ink: #F4F5F6;
+  --shadow: 0 1px 2px rgba(17,20,24,.05), 0 10px 30px rgba(17,20,24,.07);
+  --veil: rgba(244,245,246,.5);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0F1114; --surface: #181B20; --ink: #F2F3F5; --muted: #A2A9B3; --line: #2A2E35;
+  --accent-text: #F5A94A; --focus: #F5A94A; --head-bg: rgba(15,17,20,.88); --soft: #20242A; --navy: #0B2A66;
+  --hero-a: #181B20; --hero-b: #0F1114; --foot-bg: #07080A; --foot-ink: #F2F3F5;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --veil: rgba(15,17,20,.9); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0F1114; --surface: #181B20; --ink: #F2F3F5; --muted: #A2A9B3; --line: #2A2E35;
+  --accent-text: #F5A94A; --focus: #F5A94A; --head-bg: rgba(15,17,20,.88); --soft: #20242A; --navy: #0B2A66;
+  --hero-a: #181B20; --hero-b: #0F1114; --foot-bg: #07080A; --foot-ink: #F2F3F5;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35); --veil: rgba(15,17,20,.9); color-scheme: dark; }
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+img { display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-weight: 600; font-size: 14px; text-decoration: none; border: 0; cursor: pointer; transition: transform .15s, filter .15s; }
+.btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn[hidden] { display: none; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--head-bg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--head-bg); }
+.top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.brandrow { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.logo { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; flex: none; background: #fff; }
+.brand { font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; min-height: 38px; padding: 6px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); font-weight: 500; font-size: 13px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chips.sub { padding-bottom: 6px; }
+.chips.sub .chip { min-height: 32px; padding: 4px 14px; font-size: 12px; }
+.chips.sub .chip[aria-pressed="true"] { background: var(--accent-text); border-color: var(--accent-text); color: var(--bg); }
+
+/* hero */
+.bgfx { position: fixed; inset: 0; z-index: -1; background: linear-gradient(var(--veil), var(--veil)), url(fundo.jpg) center / cover no-repeat; }
+.hero { background: none; border-bottom: 1px solid var(--line); }
+.hero-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; padding-block: 64px; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 16px; }
+.hero h1 { font-size: clamp(34px, 5.2vw, 60px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--accent-text); }
+.lead { margin-top: 20px; font-size: 17px; color: var(--muted); max-width: 52ch; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.pillars { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; border-top: 1px solid var(--line); }
+.pillars li { padding: 14px 0; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+.pillars b { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.pillars span { font-weight: 600; }
+.story { margin: 0; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 4 / 5; background: #fff; max-width: 100%; }
+.story { position: relative; aspect-ratio: 9 / 16; max-height: 640px; justify-self: center; background: #111; }
+.story video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cap { position: absolute; left: 12px; top: 12px; right: 12px; margin: 0; display: flex; flex-direction: column; gap: 2px; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.6); pointer-events: none; }
+.cap b { font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+.cap span { font-size: 12px; font-weight: 500; opacity: .92; }
+.som { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border: 0; border-radius: 999px; background: rgba(17,20,24,.78); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; backdrop-filter: blur(6px); }
+.som svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.som[aria-pressed="true"] .off, .som[aria-pressed="false"] .on { display: none; }
+
+/* seções */
+section.blk { padding-block: 64px; }
+.sec-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-text); }
+.sec-title { font-size: clamp(26px, 3.4vw, 38px); font-weight: 700; letter-spacing: -.01em; margin-top: 8px; line-height: 1.15; }
+
+.terms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding-block: 32px 8px; }
+.term { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; }
+.term .k { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; }
+.term .v { margin-top: 6px; font-weight: 600; }
+
+.sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+.count { color: var(--muted); font-size: 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+.card { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 0 0 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; cursor: pointer; transition: transform .2s, box-shadow .2s; min-width: 0; }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.thumb { position: relative; display: block; aspect-ratio: 3 / 4; background: var(--soft); overflow: hidden; }
+.thumb img, .main img { width: 100%; height: 100%; object-fit: cover; }
+.badge { position: absolute; right: 10px; bottom: 10px; background: rgba(17,20,24,.78); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+.nome { padding: 14px 18px 0; font-weight: 600; font-size: 14px; line-height: 1.35; }
+.cor { display: flex; align-items: center; gap: 8px; padding: 0 18px; color: var(--muted); font-size: 13px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(128,128,128,.45); flex: none; display: inline-block; }
+.preco { padding: 8px 18px 0; font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.preco:is(:empty) { display: none; }
+.price-note { margin: 0; padding: 14px 16px; border-radius: 14px; background: var(--soft); border-left: 3px solid var(--accent); font-size: 14px; color: var(--muted); }
+.price-note b { color: var(--ink); font-size: 18px; font-weight: 700; }
+.min { padding: 0 18px; font-size: 12px; color: var(--muted); }
+.ph { width: 100%; height: 100%; display: grid; place-items: center; background: hsl(var(--h) 20% 80%); color: #333; font-size: 13px; }
+.dots { flex-wrap: wrap; gap: 6px; padding-top: 2px; }
+.ncores { margin-left: 4px; }
+.dot.multi { background: conic-gradient(#E0112B, #F0961C, #EDE04A, #4C9A52, #555693, #B03553, #E0112B); }
+.cbtn { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px 6px 10px; font-size: 13px; font-weight: 500; cursor: pointer; min-height: 38px; }
+.cbtn[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+.obs { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--soft); font-size: 13.5px; font-weight: 500; border-left: 3px solid var(--accent); }
+.main video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; }
+.thumbs .t { position: relative; }
+.play { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 16px; background: rgba(17,20,24,.35); }
+.malhas { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.malhas li { padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--ink); font-size: 13px; font-weight: 600; }
+.dot.big { width: 26px; height: 26px; }
+#m-cores { gap: 10px; }
+.empty { color: var(--muted); padding: 40px 0; }
+
+/* menegotti */
+.mene { background: color-mix(in srgb, var(--surface) 90%, transparent); border-block: 1px solid var(--line); }
+.mene-in { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center; }
+.mene-logo { background: #fff; border-radius: 28px; padding: 40px; display: grid; place-items: center; border: 1px solid var(--line); }
+.mene-logo img { width: min(100%, 360px); height: auto; }
+.mene p.st { margin-top: 18px; font-size: 18px; color: var(--muted); max-width: 54ch; }
+.mene p.st b { color: var(--ink); font-weight: 600; }
+.specs { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.specs li { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.specs b { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.specs span { display: block; margin-top: 4px; font-weight: 600; }
+
+/* informações */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 32px; }
+.inf { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+.inf svg { width: 48px; height: 48px; color: var(--ink); fill: currentColor; stroke: none; }
+.inf svg .s, .callout svg .s { fill: none; stroke: currentColor; stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+.inf svg .w { stroke: var(--surface); stroke-width: 2; }
+.inf svg .t { fill: var(--surface); font-family: Poppins, sans-serif; font-weight: 700; font-size: 14px; }
+.inf h3 { margin-top: 14px; font-size: 16px; font-weight: 600; }
+.inf p { margin-top: 6px; color: var(--muted); font-size: 14px; }
+.callout { margin-top: 24px; display: flex; gap: 14px; align-items: center; background: var(--ink); color: var(--bg); border-radius: 20px; padding: 20px 24px; font-weight: 600; }
+.callout svg { width: 40px; height: 40px; flex: none; color: var(--accent); fill: currentColor; stroke: none; }
+
+/* rodapé */
+.foot { background: var(--foot-bg); color: var(--foot-ink); padding-block: 40px; padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+.foot p { min-width: 0; }
+
+/* modal */
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(10,12,15,.66); backdrop-filter: blur(4px); display: grid; place-items: center; padding: 16px; }
+.sheet { position: relative; width: min(980px, 100%); max-height: calc(100dvh - 32px); overflow: auto; background: var(--surface); border-radius: 24px; display: grid; grid-template-columns: 1.05fr 1fr; }
+.close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--surface); color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.2); }
+.gal { min-width: 0; background: var(--soft); }
+.main { aspect-ratio: 3 / 4; overflow: hidden; }
+.thumbs { display: flex; gap: 8px; padding: 10px; overflow-x: auto; }
+.thumbs button { flex: none; width: 64px; padding: 0; border: 2px solid transparent; border-radius: 10px; overflow: hidden; background: none; cursor: pointer; opacity: .7; }
+.thumbs button[aria-current] { border-color: var(--accent); opacity: 1; }
+.thumbs .t { display: block; aspect-ratio: 3 / 4; }
+.thumbs .t img { width: 100%; height: 100%; object-fit: cover; }
+.info { padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.info .cat { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; }
+.info h2 { font-size: 22px; font-weight: 700; margin-top: 6px; line-height: 1.25; padding-right: 40px; }
+.info .cor { padding: 0; margin-top: 8px; font-size: 14px; }
+.price { font-size: 30px; font-weight: 700; }
+.price small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.info h3 { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+.sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+.size { border: 1.5px solid var(--line); border-radius: 10px; min-width: 44px; padding: 6px 12px; text-align: center; font-weight: 600; }
+.rules { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 14px; color: var(--muted); }
+.rules li { padding-left: 18px; position: relative; }
+.rules li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+@media (max-width: 980px) { .terms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  .hero-in { grid-template-columns: 1fr; gap: 32px; padding-block: 32px 40px; }
+  .story { order: -1; width: min(100%, 300px); max-height: none; }
+  .mene-in { grid-template-columns: 1fr; gap: 32px; }
+  .sheet { grid-template-columns: 1fr; }
+  .main { aspect-ratio: 4 / 5; }
+  section.blk { padding-block: 48px; }
+}
+@media (max-width: 640px) {
+  .terms { grid-template-columns: 1fr; }
+  .specs { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .nome { padding: 12px 12px 0; font-size: 13px; } .cor, .preco, .min { padding-left: 12px; padding-right: 12px; }
+  .preco { font-size: 18px; }
+  .brand { font-size: 12px; letter-spacing: .1em; }
+  .top .btn { padding: 8px 14px; font-size: 13px; }
+  .pillars { grid-template-columns: 1fr; }
+  .mene-logo { padding: 28px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<div class="bgfx" aria-hidden="true"></div>
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brandrow">
+        <img class="logo" src="logo.jpg" alt="" width="44" height="44">
+        <div class="brand" id="brand"></div>
+      </div>
+      <a class="btn" id="zap-top" hidden target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria" hidden></div>
+    <div class="chips sub" id="subchips" role="group" aria-label="Filtrar por tipo" hidden></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">Catálogo de atacado</p>
+      <h1>Camisaria <em>adulto e juvenil</em></h1>
+      <p class="lead">Malha Menegotti 100% algodão, fio penteado: conforto e durabilidade em cada peça. Peças a partir de R$ 16, com fabricação própria.</p>
+      <div class="cta">
+        <a class="btn" href="#modelos">Ver modelos</a>
+        <a class="btn ghost" id="zap-hero" hidden target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <ul class="pillars">
+        <li><b>Marca</b><span>Rota da Fuga</span></li>
+        <li><b>Malhas</b><span>Menegotti, Peruana texturizada e Malha em linho</span></li>
+        <li><b>Fio</b><span>Fios tecnológicos</span></li>
+        <li><b>Linha</b><span>Camisaria adulto e juvenil</span></li>
+      </ul>
+    </div>
+    <figure class="story">
+      <video id="vid" src="reel.mp4" poster="reel-poster.jpg" autoplay muted playsinline preload="metadata" aria-label="Vídeo da malha Menegotti Rota da Fuga"></video>
+      <p class="cap"><b>Malhas Menegotti</b><span>Peruana texturizada · Malha em linho</span></p>
+      <button class="som" id="som" type="button" aria-pressed="false" aria-label="Ativar som">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="on" d="M16 9c1.3 1.2 1.3 4.8 0 6M18.5 6.5c3 3 3 8 0 11"/><path class="off" d="M16 9l5 6M21 9l-5 6"/></svg>
+        <span id="som-t">Ativar som</span>
+      </button>
+    </figure>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <section class="terms" aria-label="Condições de venda">
+      <div class="term"><p class="k">Atacado</p><p class="v">A partir de 10 peças por tamanho (camisaria), podendo variar</p></div>
+      <div class="term"><p class="k">Envio</p><p class="v">Para todo o Brasil, via excursões e transportadora</p></div>
+      <div class="term"><p class="k">Preços</p><p class="v">Peças a partir de R$ 16, fabricação própria. Para mais informações sobre preços, consulte nosso WhatsApp</p></div>
+      <div class="term"><p class="k">Pagamento</p><p class="v">Pix, transferência, depósito ou à vista</p></div>
+    </section>
+  </div>
+
+  <section class="blk" id="modelos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="sec-eyebrow">Coleção</p><h2 class="sec-title">Modelos</h2></div>
+        <p class="count" id="count" aria-live="polite"></p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="blk mene" id="malha">
+    <div class="wrap mene-in">
+      <div class="mene-logo"><img src="menegotti.png" alt="Menegotti" width="760" height="608" loading="lazy"></div>
+      <div>
+        <p class="sec-eyebrow">Nossa malha</p>
+        <h2 class="sec-title">Qualidade que se sente no toque</h2>
+        <p class="st">Trabalhamos com malhas <b>Menegotti</b>, <b>100% algodão</b>, fio <b>penteado</b>. O resultado é <b>conforto</b> e <b>durabilidade</b> para o seu cliente.</p>
+        <ul class="specs">
+          <li><b>Composição</b><span>100% algodão</span></li>
+          <li><b>Fio</b><span>Penteado</span></li>
+          <li><b>Selo</b><span>Menegotti</span></li>
+        </ul>
+        <ul class="malhas" aria-label="Nossas malhas">
+          <li>Malhas Menegotti</li>
+          <li>Peruana texturizada</li>
+          <li>Malha em linho</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="informacoes">
+    <div class="wrap">
+      <p class="sec-eyebrow">Informações</p>
+      <h2 class="sec-title">Como comprar no atacado</h2>
+      <div class="info-grid">
+        <div class="inf">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 18l27-2 4 28H7z"/><path class="s" d="M17 19v-4a7 7 0 0 1 14-1v4"/></svg>
+          <h3>Venda no atacado</h3><p>Camisaria a partir de 10 peças, podendo variar entre os modelos.</p>
+        </div>
+        <div class="inf">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 14h32l-5 17H17z"/><path class="s" d="M3 7h7l7 29h22"/><circle cx="19" cy="42" r="3.6"/><circle cx="36" cy="42" r="3.6"/></svg>
+          <h3>Grade fechada</h3><p>Jeans e brins são vendidos em grade fechada.</p>
+        </div>
+        <div class="inf">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="16" width="9" height="2.6" rx="1.3"/><rect x="4" y="22" width="7" height="2.6" rx="1.3"/><rect x="1" y="28" width="10" height="2.6" rx="1.3"/><path d="M13 10h22v26H13z"/><path fill-rule="evenodd" d="M37 17h6l5 8v11H37zM40 20.5v4.5h5.2l-2.6-4.5z"/><circle class="w" cx="21" cy="37" r="4.6"/><circle class="w" cx="42" cy="37" r="4.6"/></svg>
+          <h3>Envio para todo o Brasil</h3><p>Despachamos via excursões e transportadora.</p>
+        </div>
+        <div class="inf">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path class="s" d="M8.5 19.9A16 16 0 0 1 36.3 13.7"/><path d="M39.5 17.5l-6.3-1.2 3.1-5.2z"/><path class="s" d="M39.5 28.1A16 16 0 0 1 11.7 34.3"/><path d="M8.5 30.5l6.3 1.2-3.1 5.2z"/><circle cx="24" cy="24" r="10"/><text class="t" x="24" y="29" text-anchor="middle">$</text></svg>
+          <h3>Formas de pagamento</h3><p>Transferência, depósito ou Pix.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path class="s" d="M24 7L44 41H4z"/><rect x="21.8" y="18" width="4.4" height="13" rx="2.2"/><circle cx="24" cy="35" r="2.6"/></svg>
+        <p>Pedidos separados e enviados após confirmação de pagamento.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="brandrow">
+      <img class="logo" src="logo.jpg" alt="Logo Rota da Fuga" width="56" height="56">
+      <p id="foot-text"></p>
+    </div>
+    <a class="btn" id="zap-foot" hidden target="_blank" rel="noopener">Fazer um pedido</a>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-nome" id="sheet">
+    <button class="close" id="close" aria-label="Fechar">&times;</button>
+    <div class="gal">
+      <div class="main" id="m-main"></div>
+      <div class="thumbs" id="m-thumbs"></div>
+    </div>
+    <div class="info">
+      <div>
+        <p class="cat" id="m-cat"></p>
+        <h2 id="m-nome"></h2>
+        <p class="cor" id="m-cor"></p>
+      </div>
+      <div id="m-cores-wrap"><h3>Cores</h3><div class="sizes" id="m-cores"></div></div>
+      <div id="m-sizes-wrap" hidden><h3 id="m-sizes-h">Tamanhos</h3><div class="sizes" id="m-sizes"></div></div>
+      <div id="m-det-wrap" hidden><h3>Detalhes</h3><ul class="rules" id="m-det"></ul></div>
+      <p class="obs" id="m-obs" hidden></p>
+      <ul class="rules">
+        <li id="m-regra">Atacado a partir de 10 peças por tamanho</li>
+        <li>Envio para todo o Brasil via excursões e transportadora</li>
+        <li>Pix, transferência, depósito ou à vista</li>
+      </ul>
+      <a class="btn" id="m-zap" hidden target="_blank" rel="noopener">Consultar preços deste modelo</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO ===== */
+var CONFIG = {
+  loja: "Rota da Fuga",
+  whatsapp: "81982081070",            // só números, com DDD. Ex.: 81999999999
+  rodape: "Vendas no atacado para todo o Brasil."
+};
+
+/* Cada item: fotos é a lista de imagens, na ordem em que aparecem na galeria.
+   tamanhos: ["P","M","G"] mostra os tamanhos na janela do modelo; vazio esconde. */
+var NOME = "Camisa Gola malha em linho";
+var NOME2 = "Camisa Gola Polo malha texturizada, corte lateral";
+var NOME3 = "Camisa malha Peruana Premium";
+var NOME4 = "Camisa Gola Polo Juvenil";
+var NOME5 = "Camisa Gola Redonda Juvenil";
+var NOME6 = "Camisa Malha Menegotti Premium";
+var NOME7 = "Camisa Gola Redonda Estampada Juvenil";
+var NOME8 = "Calça Cargo";
+var T8 = ["38","40","42","44","46"];
+var T6 = ["P", "M", "G", "GG"];
+var POSTER = { "gc-cores.mp4": "gc-cores-poster.jpg" };
+var T4 = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
+var MODELOS = [
+  { nome: NOME6, cor: "Vermelho", hex: "#D32F3F", categoria: "Polos", preco: null, tamanhos: T6, det: ["Corte a laser lateral", "Botão personalizado", "Detalhe nas costas", "Caimento na gola"], fotos: ["mp-vermelho-1.jpg", "mp-vermelho-2.jpg"] },
+  { nome: NOME6, cor: "Verde militar", hex: "#4F5B2E", categoria: "Polos", preco: null, tamanhos: T6, fotos: ["mp-verde-1.jpg", "mp-verde-2.jpg"] },
+  { nome: NOME6, cor: "Preto", hex: "#1B1B1D", categoria: "Polos", preco: null, tamanhos: T6, fotos: ["mp-preto-1.jpg", "mp-preto-2.jpg"] },
+  { nome: NOME6, cor: "Azul marinho", hex: "#2C3A6E", categoria: "Polos", preco: null, tamanhos: T6, fotos: ["mp-azul-1.jpg", "mp-azul-2.jpg"] },
+  { nome: NOME6, cor: "Marrom", hex: "#5A2A22", categoria: "Polos", preco: null, tamanhos: T6, fotos: ["mp-marrom-1.jpg", "mp-marrom-2.jpg"] },
+  { nome: NOME6, cor: "Verde claro", hex: "#B5C79A", categoria: "Polos", preco: null, tamanhos: T6, fotos: [] },
+  { nome: NOME6, cor: "Caqui", hex: "#8F8460", categoria: "Polos", preco: null, tamanhos: T6, fotos: [] },
+  { nome: NOME6, cor: "Vinho", hex: "#6E1426", categoria: "Polos", preco: null, tamanhos: T6, fotos: [] },
+  { nome: NOME6, cor: "Terracota", hex: "#C4562F", categoria: "Polos", preco: null, tamanhos: T6, fotos: [] },
+  { nome: NOME6, cor: "Bege", hex: "#E2C7A0", categoria: "Polos", preco: null, tamanhos: T6, fotos: [] },
+  { nome: NOME, cor: "Todas as cores", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["todas-cores-1.jpg", "todas-cores-2.jpg"] },
+  { nome: NOME, cor: "Preto",     hex: "#1B1B1D", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["preto-1.jpg", "preto-2.jpg"] },
+  { nome: NOME, cor: "Chocolate", hex: "#5B2C1F", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["chocolate-1.jpg"] },
+  { nome: NOME, cor: "Caramelo",  hex: "#9C4B2B", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["caramelo-1.jpg"] },
+  { nome: NOME, cor: "Oliva",     hex: "#786F59", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["oliva-1.jpg", "oliva-2.jpg"] },
+  { nome: NOME, cor: "Bege",      hex: "#D1B48C", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["bege-1.jpg"] },
+  { nome: NOME, cor: "Off-white", hex: "#EFECE4", categoria: "Camisas", preco: 39, tamanhos: [], fotos: ["offwhite-1.jpg"] },
+  { nome: NOME3, cor: "Off-white", hex: "#EDEBDD", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-offwhite-1.jpg", "peruana-offwhite-2.jpg"] },
+  { nome: NOME3, cor: "Camel",     hex: "#C5A07C", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-camel-1.jpg", "peruana-camel-2.jpg"] },
+  { nome: NOME3, cor: "Preto",     hex: "#1B1B1D", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-preto-1.jpg", "peruana-preto-2.jpg"] },
+  { nome: NOME3, cor: "Azul",      hex: "#555693", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-azul-1.jpg", "peruana-azul-2.jpg"] },
+  { nome: NOME3, cor: "Vermelho",  hex: "#E0112B", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-vermelho-1.jpg", "peruana-vermelho-2.jpg"] },
+  { nome: NOME3, cor: "Bege",      hex: "#E2CBA9", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-bege-1.jpg", "peruana-bege-2.jpg"] },
+  { nome: NOME3, cor: "Rosa",      hex: "#E8C3B8", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-rosa-1.jpg", "peruana-rosa-2.jpg", "peruana-rosa-3.jpg"] },
+  { nome: NOME3, cor: "Marsala",   hex: "#B03553", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-marsala-1.jpg", "peruana-marsala-2.jpg"] },
+  { nome: NOME3, cor: "Coral",     hex: "#F0594F", categoria: "Camisas", preco: null, tamanhos: [], fotos: ["peruana-coral-1.jpg", "peruana-coral-2.jpg"] },
+  { nome: NOME2, cor: "Areia",       hex: "#D9D3C4", categoria: "Polos", preco: null, tamanhos: [], fotos: ["polo-areia-1.jpg", "polo-areia-2.jpg", "polo-areia-3.jpg"] },
+  { nome: NOME2, cor: "Ferrugem",    hex: "#9B4A2B", categoria: "Polos", preco: null, tamanhos: [], fotos: ["polo-ferrugem-1.jpg", "polo-ferrugem-2.jpg", "polo-ferrugem-3.jpg"] },
+  { nome: NOME2, cor: "Verde oliva", hex: "#8A9150", categoria: "Polos", preco: null, tamanhos: [], fotos: ["polo-verde-1.jpg", "polo-verde-2.jpg"] },
+  { nome: NOME2, cor: "Azul marinho", hex: "#232B4D", categoria: "Polos", preco: null, tamanhos: [], fotos: ["polo-azul-1.jpg", "polo-azul-2.jpg"] },
+  { nome: NOME2, cor: "Preto",       hex: "#1B1B1D", categoria: "Polos", preco: null, tamanhos: [], fotos: ["polo-preto-1.jpg", "polo-preto-2.jpg", "polo-preto-3.jpg"] },
+  { nome: NOME4, cor: "Todas as cores", categoria: "Juvenil", preco: 25, tamanhos: T4, min: "atacado · pacote com 10 peças", un: "1 a 14 anos", fotos: ["juv-todas-1.jpg", "juv-todas-2.jpg"] },
+  { nome: NOME4, cor: "Marrom",    hex: "#7B3F22", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: ["juv-marrom-1.jpg", "juv-marrom-2.jpg"] },
+  { nome: NOME4, cor: "Amarelo",   hex: "#F6A81C", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: ["juv-amarelo-1.jpg"] },
+  { nome: NOME4, cor: "Azul bebê", hex: "#A9C8EE", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: ["juv-azul-1.jpg", "juv-azul-2.jpg"] },
+  { nome: NOME4, cor: "Branco",    hex: "#F4F4F2", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: ["juv-branco-1.jpg"] },
+  { nome: NOME4, cor: "Bege",      hex: "#D3B48F", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: ["juv-bege-1.jpg"] },
+  { nome: NOME4, cor: "Preto",     hex: "#1B1B1D", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: [], ref: "juv-todas-2.jpg" },
+  { nome: NOME4, cor: "Vermelho",  hex: "#B5122E", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: [], ref: "juv-todas-2.jpg" },
+  { nome: NOME4, cor: "Verde",     hex: "#A5B38A", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: [], ref: "juv-todas-2.jpg" },
+  { nome: NOME4, cor: "Cinza",     hex: "#8E9399", categoria: "Juvenil", preco: 25, tamanhos: T4, fotos: [], ref: "juv-todas-2.jpg" },
+  { nome: NOME5, cor: "Todas as cores", sem: true, categoria: "Juvenil", preco: 16, tamanhos: [], un: "1 a 14 anos", fotos: ["gc-cores.mp4", "gc-todas-1.jpg", "gc-todas-2.jpg"] },
+  { nome: NOME5, cor: "Preto",        hex: "#1B1B1D", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: ["gc-preto-1.jpg"] },
+  { nome: NOME5, cor: "Verde militar", hex: "#4B5232", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: ["gc-verde-1.jpg", "gc-verde-2.jpg"] },
+  { nome: NOME5, cor: "Cinza",        hex: "#8D9091", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: ["gc-cinza-1.jpg"] },
+  { nome: NOME5, cor: "Verde oliva",  hex: "#9BA46E", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: ["gc-oliva-1.jpg"] },
+  { nome: NOME5, cor: "Laranja",      hex: "#F2A26B", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: ["gc-laranja-1.jpg", "gc-laranja-2.jpg"] },
+  { nome: NOME5, cor: "Vermelho",     hex: "#B5122E", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: [], ref: "gc-todas-2.jpg" },
+  { nome: NOME5, cor: "Grafite",      hex: "#4B4F5E", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: [], ref: "gc-todas-2.jpg" },
+  { nome: NOME5, cor: "Verde limão",  hex: "#A9C21F", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: [], ref: "gc-todas-2.jpg" },
+  { nome: NOME5, cor: "Verde claro",  hex: "#C3E57C", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: [], ref: "gc-todas-2.jpg" },
+  { nome: NOME5, cor: "Mostarda",     hex: "#D58B22", categoria: "Juvenil", preco: 16, tamanhos: [], fotos: [], ref: "gc-todas-2.jpg" },
+  { nome: NOME7, cor: "Bege",          hex: "#D8C7A8", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: ["ce-dupla.jpg", "ce-bege.jpg"] },
+  { nome: NOME7, cor: "Vermelho",      hex: "#D8323A", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Verde limão",   hex: "#74C65A", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: ["ce-verde.jpg"] },
+  { nome: NOME7, cor: "Verde militar", hex: "#5E7152", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Cinza claro",   hex: "#AEB9C9", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Azul royal",    hex: "#1F5FD0", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Grafite",       hex: "#4F5057", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Marrom",        hex: "#8A5328", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Caqui",         hex: "#BDA16C", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME7, cor: "Preto",         hex: "#1B1B1D", categoria: "Juvenil", preco: null, tamanhos: T4, un: "1 a 14 anos", fotos: [] },
+  { nome: NOME8, cor: "Marrom", hex: "#5A4A3A", categoria: "Calças", preco: null, tamanhos: T8, min: "atacado · 10 peças, podendo variar até 3 números", regra: "Atacado: 10 peças, podendo variar até 3 números na hora da escolha", fotos: ["cg-marrom-1.jpg", "cg-marrom-2.jpg", "cg-marrom-3.jpg"] },
+  { nome: NOME8, cor: "Bege",   hex: "#C9BFB0", categoria: "Calças", preco: null, tamanhos: T8, fotos: ["cg-bege-1.jpg", "cg-bege-2.jpg", "cg-bege-3.jpg"] },
+  { nome: NOME8, cor: "Preto",  hex: "#1F1D1F", categoria: "Calças", preco: null, tamanhos: T8, fotos: ["cg-preto-1.jpg", "cg-preto-2.jpg", "cg-preto-3.jpg"] },
+];
+/* ======================= */
+
+var $ = function (id) { return document.getElementById(id); };
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function brl(v) { return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+function preco(m) { return m.preco == null ? "Consulte o valor" : brl(m.preco); }
+function imgs(m) { return Array.isArray(m.fotos) ? m.fotos : Array.from({ length: m.fotos }, function () { return null; }); }
+function foto(m, i, alt, eager) {
+  var src = imgs(m)[i];
+  if (src) return '<img src="' + esc(src) + '" alt="' + esc(alt) + '"' + (eager ? "" : ' loading="lazy"') + ">";
+  return '<div class="ph" style="--h:' + (((m.h || 200) + i * 12) % 360) + '" role="img" aria-label="' + esc(alt) + '">Foto ' + (i + 1) + "</div>";
+}
+function dot(m) { return m.hex ? '<span class="dot" style="background:' + esc(m.hex) + '"></span>' : ""; }
+function zapLink(text) {
+  var n = String(CONFIG.whatsapp || "").replace(/\D/g, "");
+  if (!n) return "";
+  if (n.length <= 11) n = "55" + n;
+  return "https://wa.me/" + n + "?text=" + encodeURIComponent(text);
+}
+
+var filtro = "Todos";
+var sub = "";
+var SUBS = {
+  "Camisas": ["Polo", "Redonda"],
+  "Calças": ["Calça jeans", "Calça brim", "Calça cargo", "Calça esporte fino"],
+  "Bermudas": ["Bermuda jeans", "Bermuda brim", "Bermuda cargo"]
+};
+var MAPA = {};
+MAPA[NOME6] = ["Camisas", "Polo"]; MAPA[NOME2] = ["Camisas", "Polo"]; MAPA[NOME4] = ["Camisas", "Polo"];
+MAPA[NOME8] = ["Calças", "Calça cargo"];
+MAPA[NOME] = ["Camisas", "Redonda"]; MAPA[NOME3] = ["Camisas", "Redonda"]; MAPA[NOME5] = ["Camisas", "Redonda"]; MAPA[NOME7] = ["Camisas", "Redonda"];
+var aberto = null;
+var fotoAtual = 0;
+var ultimoFoco = null;
+
+function renderTopo() {
+  $("brand").textContent = CONFIG.loja;
+  document.title = "Catálogo " + CONFIG.loja;
+  $("foot-text").textContent = CONFIG.loja + ". " + CONFIG.rodape;
+  var topo = zapLink("Olá! Vi o catálogo de atacado da " + CONFIG.loja + " e quero fazer um pedido.");
+  ["zap-top", "zap-hero", "zap-foot"].forEach(function (id) {
+    var a = $(id);
+    if (topo) { a.href = topo; a.hidden = false; } else { a.hidden = true; }
+  });
+}
+
+function renderChips() {
+  var cats = ["Todos", "Camisas", "Calças", "Bermudas"];
+  $("chips").hidden = false;
+  $("chips").innerHTML = cats.map(function (c) {
+    return '<button class="chip" type="button" data-cat="' + esc(c) + '" aria-pressed="' + (c === filtro) + '">' + esc(c) + "</button>";
+  }).join("");
+  var ss = SUBS[filtro];
+  $("subchips").hidden = !ss;
+  $("subchips").innerHTML = ss ? ['Todas'].concat(ss).map(function (s, k) {
+    var v = k === 0 ? "" : s;
+    return '<button class="chip" type="button" data-sub="' + esc(v) + '" aria-pressed="' + (v === sub) + '">' + esc(s) + "</button>";
+  }).join("") : "";
+}
+
+/* agrupa as cores de cada camisa em um único produto */
+var PRODUTOS = [];
+MODELOS.forEach(function (m) {
+  var p = PRODUTOS.filter(function (x) { return x.nome === m.nome; })[0];
+  if (!p) { p = { grupo: (MAPA[m.nome] || ["", ""])[0], tipo: (MAPA[m.nome] || ["", ""])[1], nome: m.nome, categoria: m.categoria, preco: m.preco, tamanhos: m.tamanhos || [], cores: [], flat: [], obs: m.obs, min: m.min, regra: m.regra, un: m.un, sem: true, det: m.det }; PRODUTOS.push(p); }
+  var ci = p.cores.length;
+  var ini = p.flat.length;
+  if (!m.fotos.length && m.ref) {
+    p.flat.forEach(function (f, k) { if (f.src === m.ref && ini === p.flat.length) ini = k; });
+  }
+  p.cores.push({ cor: m.cor, hex: m.hex, ini: ini });
+  m.fotos.forEach(function (src) { p.flat.push({ src: src, ci: ci }); });
+});
+function corDot(c) {
+  return c.hex ? '<span class="dot" style="background:' + esc(c.hex) + '"></span>'
+               : '<span class="dot multi"></span>';
+}
+function ehVideo(src) { return /\.mp4$/i.test(src); }
+function pfoto(p, k, alt, eager, thumb) {
+  var src = p.flat[k].src;
+  if (ehVideo(src)) {
+    var pos = POSTER[src] || "";
+    if (thumb) return '<img src="' + esc(pos) + '" alt=""><span class="play" aria-hidden="true">&#9654;</span>';
+    return '<video src="' + esc(src) + '" poster="' + esc(pos) + '" controls autoplay muted loop playsinline preload="metadata" aria-label="' + esc(alt) + '"></video>';
+  }
+  return '<img src="' + esc(src) + '" alt="' + esc(alt) + '"' + (eager ? "" : ' loading="lazy"') + ">";
+}
+
+function renderGrid() {
+  var lista = PRODUTOS.map(function (p, i) { return { p: p, i: i }; })
+    .filter(function (x) { return filtro === "Todos" || (x.p.grupo === filtro && (!sub || x.p.tipo === sub)); });
+  $("count").textContent = lista.length + (lista.length === 1 ? " modelo" : " modelos");
+  if (!lista.length) {
+    var nome = sub || filtro;
+    $("grid").innerHTML = '<p class="empty">' + (SUBS[filtro] && !(filtro === "Camisas") ? "Novos modelos de " + esc(nome.toLowerCase()) + " em breve. Consulte nosso WhatsApp." : "Nenhum modelo nesta categoria.") + "</p>";
+    return;
+  }
+  $("grid").innerHTML = lista.map(function (x) {
+    var p = x.p;
+    var reais = p.cores.filter(function (c) { return c.hex; });
+    var capa = reais.length ? reais[0].ini : 0;
+    return '<button class="card" type="button" data-i="' + x.i + '">' +
+      '<span class="thumb">' + pfoto(p, capa, p.nome, false, true) + '<span class="badge">' + p.flat.length + " fotos</span></span>" +
+      '<span class="nome">' + esc(p.nome) + "</span>" +
+      '<span class="cor dots">' + reais.map(corDot).join("") + '<span class="ncores">Cores variadas · ' + reais.length + " cores</span></span>" +
+      '<span class="min">' + esc(p.min || "atacado · mín. 10 por tamanho") + "</span>" +
+      "</button>";
+  }).join("");
+}
+
+function mostrarFoto(k, forcaCi) {
+  var p = PRODUTOS[aberto];
+  fotoAtual = k;
+  var ci = forcaCi != null ? forcaCi : p.flat[k].ci, c = p.cores[ci];
+  $("m-main").innerHTML = pfoto(p, k, p.nome + ", " + c.cor + ", foto " + (k + 1), true);
+  $("m-cor").textContent = "Cores variadas · " + p.cores.filter(function (x) { return x.hex; }).length + " cores diferentes";
+  Array.prototype.forEach.call($("m-thumbs").children, function (b, j) {
+    if (j === k) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current");
+  });
+  Array.prototype.forEach.call($("m-cores").children, function (b, j) {
+    b.setAttribute("aria-pressed", j === ci);
+  });
+}
+
+function abrir(i) {
+  var p = PRODUTOS[i];
+  aberto = i;
+  ultimoFoco = document.activeElement;
+  $("m-cat").textContent = p.categoria;
+  $("m-nome").textContent = p.nome;
+  $("m-det-wrap").hidden = !(p.det && p.det.length);
+  $("m-det").innerHTML = (p.det || []).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+  $("m-regra").textContent = p.regra || "Atacado a partir de 10 peças por tamanho";
+  $("m-obs").textContent = p.obs || "";
+  $("m-obs").hidden = !p.obs;
+  var tem = p.tamanhos && p.tamanhos.length;
+  $("m-sizes-wrap").hidden = !(tem || p.un);
+  $("m-sizes-h").textContent = "Tamanhos";
+  $("m-sizes").innerHTML = p.un ? '<span class="size">' + esc(p.un) + "</span>" : tem ? p.tamanhos.map(function (t) { return '<span class="size">' + esc(t) + "</span>"; }).join("") : "";
+  $("m-cores-wrap").hidden = false;
+  $("m-cores").innerHTML = p.cores.filter(function (c) { return c.hex; }).map(function (c) { return '<span class="dot big" style="background:' + esc(c.hex) + '"></span>'; }).join("");
+  $("m-thumbs").innerHTML = p.flat.length > 1 ? p.flat.map(function (f, k) {
+    return '<button type="button" data-k="' + k + '" aria-label="Foto ' + (k + 1) + ", " + esc(p.cores[f.ci].cor) + '"><span class="t">' + pfoto(p, k, "", true, true) + "</span></button>";
+  }).join("") : "";
+  var reais = p.cores.filter(function (c) { return c.hex; }).map(function (c) { return c.cor; });
+  var link = zapLink("Olá! Quero pedir a " + p.nome + (reais.length && !p.sem ? " (cores: " + reais.join(", ") + ")" : "") + ". Gostaria de saber os valores.");
+  var z = $("m-zap");
+  if (link) { z.href = link; z.hidden = false; } else { z.hidden = true; }
+  $("overlay").hidden = false;
+  $("sheet").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  var reaisIdx = p.cores.filter(function (c) { return c.hex; });
+  mostrarFoto(reaisIdx.length ? reaisIdx[0].ini : 0);
+  $("close").focus();
+}
+
+function fechar() {
+  $("overlay").hidden = true;
+  document.body.style.overflow = "";
+  aberto = null;
+  if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+}
+
+$("chips").addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-cat]");
+  if (!b) return;
+  filtro = b.getAttribute("data-cat");
+  sub = "";
+  renderChips();
+  renderGrid();
+});
+$("subchips").addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-sub]");
+  if (!b) return;
+  sub = b.getAttribute("data-sub");
+  renderChips();
+  renderGrid();
+});
+$("grid").addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-i]");
+  if (b) abrir(Number(b.getAttribute("data-i")));
+});
+$("m-thumbs").addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-k]");
+  if (b) mostrarFoto(Number(b.getAttribute("data-k")));
+});
+$("m-cores").addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-c]");
+  if (b) { var cc = Number(b.getAttribute("data-c")); mostrarFoto(PRODUTOS[aberto].cores[cc].ini, cc); }
+});
+$("close").addEventListener("click", fechar);
+$("overlay").addEventListener("click", function (e) { if (e.target === $("overlay")) fechar(); });
+document.addEventListener("keydown", function (e) {
+  if ($("overlay").hidden) return;
+  if (e.key === "Escape") fechar();
+  var n = PRODUTOS[aberto].flat.length;
+  if (e.key === "ArrowRight" && n > 1) mostrarFoto((fotoAtual + 1) % n);
+  if (e.key === "ArrowLeft" && n > 1) mostrarFoto((fotoAtual - 1 + n) % n);
+});
+
+(function () {
+  var v = $("vid"), lista = ["reel.mp4", "marca.mp4"], posters = ["reel-poster.jpg", "marca-poster.jpg"], i = 0;
+  v.addEventListener("ended", function () {
+    i = (i + 1) % lista.length;
+    v.poster = posters[i]; v.src = lista[i];
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  });
+})();
+$("som").addEventListener("click", function () {
+  var v = $("vid"), on = v.muted;
+  v.muted = !on;
+  if (on) { v.volume = 1; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+  $("som").setAttribute("aria-pressed", on);
+  $("som").setAttribute("aria-label", on ? "Desativar som" : "Ativar som");
+  $("som-t").textContent = on ? "Som ligado" : "Ativar som";
+});
+
+renderTopo();
+renderChips();
+renderGrid();
+</script>
